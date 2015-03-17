@@ -7,13 +7,17 @@ namespace algoritm1
             Uf.union(1,2);
             Uf.union(3,4);
             Uf.union(2,3);
-            bool test = Uf.connection(1,4);
+            bool test = Uf.connection(1,5);
             Console.Write("{0}\n", test);
             return 0;
         }
     
     public class uf{
         private int[] id;
+        private int root(int i){
+        while(i != id[i]) i = id[i];
+        return i;
+        }
         public uf(int n){
             id = new int[n];
             for(int i = 0; i < n; i++)
@@ -21,19 +25,15 @@ namespace algoritm1
 
         }
         public void union(int a, int b){
-            for(int i = 0; i < id.Length; i++){
-                int dpi = id[a];
-                if(id[i] == dpi)
-                id[i] = id[b];
+            id[root(a)] = root(b);
             }
             
-        }
+        
         public bool connection(int a, int b){
-            return id[a] == id[b];
+            return root(a) == root(b);
         }
     }
 
     }
-
 
 }
